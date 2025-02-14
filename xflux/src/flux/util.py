@@ -98,12 +98,12 @@ class Annotator:
 class ModelSpec:
     params: FluxParams
     ae_params: AutoEncoderParams
-    ckpt_path = None
-    ae_path = None
-    repo_id = None
-    repo_flow = None
-    repo_ae = None
-    repo_id_ae = None
+    ckpt_path: None
+    ae_path: None
+    repo_id: None
+    repo_flow: None
+    repo_ae: None
+    repo_id_ae: None
 
 
 configs = {
