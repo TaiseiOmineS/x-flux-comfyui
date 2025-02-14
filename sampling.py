@@ -19,8 +19,8 @@ def model_forward(
     timesteps: Tensor,
     y: Tensor,
     block_controlnet_hidden_states=None,
-    guidance: Tensor | None = None,
-    neg_mode: bool | None = False,
+    guidance = None,
+    neg_mode = False,
 ) -> Tensor:
     if img.ndim != 3 or txt.ndim != 3:
         raise ValueError("Input img and txt tensors must have 3 dimensions.")
@@ -224,7 +224,7 @@ def denoise(
 
 def denoise_controlnet(
     model,
-    controlnets_container: None|List[ControlNetContainer],
+    controlnets_container,
     # model input
     img: Tensor,
     img_ids: Tensor,

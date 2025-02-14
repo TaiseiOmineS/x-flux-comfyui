@@ -98,12 +98,12 @@ class Annotator:
 class ModelSpec:
     params: FluxParams
     ae_params: AutoEncoderParams
-    ckpt_path: str | None
-    ae_path: str | None
-    repo_id: str | None
-    repo_flow: str | None
-    repo_ae: str | None
-    repo_id_ae: str | None
+    ckpt_path = None
+    ae_path = None
+    repo_id = None
+    repo_flow = None
+    repo_ae = None
+    repo_id_ae = None
 
 
 configs = {
@@ -224,7 +224,7 @@ def load_from_repo_id(repo_id, checkpoint_name):
     sd = load_sft(ckpt_path, device='cpu')
     return sd
 
-def load_flow_model(name: str, device: str | torch.device = "cuda", hf_download: bool = True):
+def load_flow_model(name: str, device = "cuda", hf_download: bool = True):
     # Loading Flux
     print("Init model")
     ckpt_path = configs[name].ckpt_path
@@ -247,7 +247,7 @@ def load_flow_model(name: str, device: str | torch.device = "cuda", hf_download:
         print_load_warning(missing, unexpected)
     return model
 
-def load_flow_model2(name: str, device: str | torch.device = "cuda", hf_download: bool = True):
+def load_flow_model2(name: str, device = "cuda", hf_download: bool = True):
     # Loading Flux
     print("Init model")
     ckpt_path = configs[name].ckpt_path
@@ -277,15 +277,15 @@ def load_controlnet(name, device, transformer=None):
         controlnet.load_state_dict(transformer.state_dict(), strict=False)
     return controlnet
 
-def load_t5(device: str | torch.device = "cuda", max_length: int = 512) -> HFEmbedder:
+def load_t5(device = "cuda", max_length: int = 512) -> HFEmbedder:
     # max length 64, 128, 256 and 512 should work (if your sequence is short enough)
     return HFEmbedder("xlabs-ai/xflux_text_encoders", max_length=max_length, torch_dtype=torch.bfloat16).to(device)
 
-def load_clip(device: str | torch.device = "cuda") -> HFEmbedder:
+def load_clip(device = "cuda") -> HFEmbedder:
     return HFEmbedder("openai/clip-vit-large-patch14", max_length=77, torch_dtype=torch.bfloat16).to(device)
 
 
-def load_ae(name: str, device: str | torch.device = "cuda", hf_download: bool = True) -> AutoEncoder:
+def load_ae(name: str, device = "cuda", hf_download: bool = True) -> AutoEncoder:
     ckpt_path = configs[name].ae_path
     if (
         ckpt_path is None

@@ -143,7 +143,7 @@ class Flux(nn.Module):
         timesteps: Tensor,
         y: Tensor,
         block_controlnet_hidden_states=None,
-        guidance: Tensor | None = None,
+        guidance = None,
     ) -> Tensor:
         if img.ndim != 3 or txt.ndim != 3:
             raise ValueError("Input img and txt tensors must have 3 dimensions.")

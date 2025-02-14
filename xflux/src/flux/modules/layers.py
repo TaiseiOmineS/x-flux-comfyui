@@ -166,7 +166,7 @@ class Modulation(nn.Module):
         self.multiplier = 6 if double else 3
         self.lin = nn.Linear(dim, self.multiplier * dim, bias=True)
 
-    def forward(self, vec: Tensor) -> tuple[ModulationOut, ModulationOut | None]:
+    def forward(self, vec: Tensor) -> tuple[ModulationOut, None]:
         out = self.lin(nn.functional.silu(vec))[:, None, :].chunk(self.multiplier, dim=-1)
 
         return (
@@ -307,7 +307,7 @@ class SingleStreamBlock(nn.Module):
         hidden_size: int,
         num_heads: int,
         mlp_ratio: float = 4.0,
-        qk_scale: float | None = None,
+        qk_scale = None,
     ):
         super().__init__()
         self.hidden_dim = hidden_size
